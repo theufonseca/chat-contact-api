@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+
+  dbcontacts:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27018:27017"
+    volumes:
+      - c:\chat\contacts\db:/data/db
+    networks:
+      - chat
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8082:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@dbcontacts:27017/
+    networks:
+      - chat
+
+networks:
+  chat:
+    driver: bridge
