@@ -22,5 +22,22 @@ namespace chat_contacts_api.Controllers
             var result = await _mediator.Send(request);
             return Ok(result);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(RemoveFriendRequest request)
+        {
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            var request = new GetFriendsRequest { Id = id };
+            var result = await _mediator.Send(request);
+
+            return Ok(result);
+        }
     }
 }

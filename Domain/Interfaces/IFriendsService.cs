@@ -12,5 +12,6 @@ namespace Domain.Interfaces
         Task Add(string id, Profile profile);
         Task Create(string id);
         Task<Friends> GetFriends(string id);
+        Task Remove(string id, string friendId);
     }
 }

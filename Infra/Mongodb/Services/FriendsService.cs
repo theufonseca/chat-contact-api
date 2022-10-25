@@ -55,5 +55,22 @@ namespace Infra.Mongodb.Services
 
             return friends;
         }
+
+        public async Task Remove(string id, string friendId)
+        {
+            var friends = await _mongoCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (friends is null)
+                return;
+
+            var friend = friends.FriendList.FirstOrDefault(x => x.Id == friendId);
+
+            if (friend is null)
+                return;
+
+            friends.FriendList.Remove(friend);
+
+            await _mongoCollection.ReplaceOneAsync(x => x.Id == id, friends);
+        }
     }
 }
