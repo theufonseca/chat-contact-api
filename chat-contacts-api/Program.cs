@@ -15,6 +15,7 @@ builder.Services.Configure<MongoDbConfig>(builder.Configuration.GetSection("Mong
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton<IFriendsService, FriendsService>();
+builder.Services.AddSingleton<IBlockedsService, BlockedsService>();
 
 
 var app = builder.Build();
