@@ -25,6 +25,12 @@ namespace Infra.Mongodb.Services
             var friends = await _mongoCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
             if (friends is null)
+            {
+                await Create(id);
+                friends = await _mongoCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            }
+
+            if (friends is null)
                 throw new Exception("Lista de amigos não localizada");
 
             var friend = _mapper.Map<ProfileModel>(profile);

@@ -39,6 +39,11 @@ namespace Domain.UseCases.Blockeds
             if (string.IsNullOrEmpty(request.FriendId))
                 throw new ArgumentException("FriendId precisa ser diferente de nulo e de vazio");
 
+            var blockeds = await _blockedService.GetBlockeds(request.Id);
+
+            if (Exists(blockeds, request.FriendId))
+                return new BlockProfileRequestResponse { Sucess = true };
+
             var profile = new Profile
             {
                 Id = request.FriendId,
@@ -50,6 +55,14 @@ namespace Domain.UseCases.Blockeds
             await _blockedService.Add(request.Id, profile);
 
             return new BlockProfileRequestResponse { Sucess = true };
+        }
+
+        private bool Exists(Entities.Blockeds blockeds, string friendId)
+        {
+            if (blockeds is null || !blockeds.BlockedList.Any(x => x.Id == friendId))
+                return false;
+
+            return true;
         }
     }
 }

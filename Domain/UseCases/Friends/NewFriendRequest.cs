@@ -37,7 +37,7 @@ namespace Domain.UseCases.Friends
             var friendProfile = new Profile
             {
                 Id = request.FriendId,
-                Name = request.Name,    
+                Name = request.Name,
                 Email = request.Email,
                 Nick = request.Nick
             };
@@ -45,20 +45,25 @@ namespace Domain.UseCases.Friends
             if (string.IsNullOrEmpty(request.Id))
                 throw new ArgumentException("Id precisa ser diferente de nulo e de vazio");
 
-            if(string.IsNullOrEmpty(request.FriendId))
+            if (string.IsNullOrEmpty(request.FriendId))
                 throw new ArgumentException("FriendId precisa ser diferente de nulo e de vazio");
 
             var friends = await _friendsService.GetFriends(request.Id);
 
-            if (friends is null)
-                await _friendsService.Create(request.Id);
+            if (Exists(friends, request.FriendId))
+                return new NewFriendRequestResponse { Sucess = true };
 
             await _friendsService.Add(request.Id, friendProfile);
 
-            return new NewFriendRequestResponse
-            {
-                Sucess = true
-            };
+            return new NewFriendRequestResponse { Sucess = true };
+        }
+
+        private bool Exists(Entities.Friends friends, string friendId)
+        {
+            if (friends is null || !friends.FriendList.Any(x => x.Id == friendId))
+                return false;
+
+            return true;
         }
     }
 }

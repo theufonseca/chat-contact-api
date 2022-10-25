@@ -16,7 +16,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddSingleton<IFriendsService, FriendsService>();
 builder.Services.AddSingleton<IBlockedsService, BlockedsService>();
-
+builder.Services.AddSingleton<IRequestsReceivedService, RequestsReceivedService>();
 
 var app = builder.Build();
 
