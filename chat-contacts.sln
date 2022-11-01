@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj", "{FC28F352-DEBB-4587-8DDB-A7A0588EF38C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "chat-contacts-grpc", "chat-contacts-grpc\chat-contacts-grpc.csproj", "{4FB6CE83-5E23-4CDD-8A13-A491B41F84B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "chat-contacts-grpc", "chat-contacts-grpc\chat-contacts-grpc.csproj", "{4FB6CE83-5E23-4CDD-8A13-A491B41F84B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
